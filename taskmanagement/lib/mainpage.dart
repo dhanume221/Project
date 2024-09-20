@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanagement/profile.dart';
 import 'package:taskmanagement/splash.dart';
-import 'package:taskmanagement/task.dart';
-import 'package:taskmanagement/task_provider.dart';
+import 'package:taskmanagement/taskfunction.dart';
+import 'package:taskmanagement/Function.dart';
 
 class Firstpage extends StatefulWidget {
   const Firstpage({super.key});

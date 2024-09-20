@@ -1,8 +1,8 @@
 // import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
 
 import 'package:flutter/material.dart';
-import 'package:taskmanagement/firstpage.dart';
-import 'package:taskmanagement/task_provider.dart';
+import 'package:taskmanagement/mainpage.dart';
+import 'package:taskmanagement/Function.dart';
 import 'package:taskmanagement/login.dart';
 
 
