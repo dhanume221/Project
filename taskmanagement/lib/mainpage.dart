@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:taskmanagement/profile.dart';
 import 'package:taskmanagement/splash.dart';
@@ -29,7 +31,7 @@ List<Task> _tasks = [];
   }
 
    void _addTask() async {
-    final title = await _showTaskDialog(currentTitle: '');
+    final title = await _showTaskDialog(currentTitle: '1');
     if (title != null) {
       await _taskProvider.addTask(Task(title: title));
       _loadTasks();
@@ -50,15 +52,16 @@ List<Task> _tasks = [];
       context: context,
       builder: (context){
         return AlertDialog(
+          backgroundColor: Color.fromARGB(255, 73, 246, 214),
           // ignore: unnecessary_null_comparison
-          title: Text(currentTitle == null ? 'Add Task' : 'Edit Task'),
+          title: Text(currentTitle == "1" ? 'Add Task' : 'Edit Task'),
           content: TextField(
             onChanged: (value){
               title=value;
             },
             decoration: const InputDecoration(hintText: 'Task Title'),
               // ignore: unnecessary_null_comparison
-              controller: currentTitle != null ? TextEditingController(text: currentTitle) : null,
+              controller: currentTitle == "1" ? null:TextEditingController(text: currentTitle),
           ),
            actions: [
             TextButton(
@@ -83,7 +86,7 @@ List<Task> _tasks = [];
     //   debugShowCheckedModeBanner: false,
     //   home:
       Scaffold(
-        backgroundColor: Color.fromARGB(255, 185, 204, 199),
+        backgroundColor: Colors.transparent,
         appBar: AppBar(title: const Text("TASK MANAGEMENT SYSTEM", 
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -132,7 +135,28 @@ List<Task> _tasks = [];
       ],),
     ),
       
-        body: ListView.builder(
+        body: Stack(
+          children:<Widget> [
+             Container(
+              width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('asset/graph.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+
+        BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Container(
+            color: Colors.white.withOpacity(0.5),
+          ),
+        ),
+
+
+           ListView.builder(
            itemCount: _tasks.length,
            itemBuilder: (context, index) {
           return ListTile(
@@ -146,6 +170,8 @@ List<Task> _tasks = [];
         },
         ),
       // ),
+          ]
+        )
     );
   }
 }
